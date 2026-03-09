@@ -36,7 +36,13 @@ function Home() {
         <div className="movie-row">
           {MOVIES.map(movie => (
             <div key={movie.id} className="movie-card">
-              <img src={movie.img} alt={movie.title} className="movie-img" />
+              {/* Note: I added a fallback 'onError' just in case a specific link ever breaks */}
+              <img 
+                src={movie.img} 
+                alt={movie.title} 
+                className="movie-img" 
+                onError={(e) => { e.target.src = "https://via.placeholder.com/200x300?text=Movie"; }} 
+              />
               <div className="movie-overlay"><p>{movie.title}</p></div>
             </div>
           ))}
