@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MOVIES = [
-  { id: 1, title: 'Wednesday', img: 'https://image.tmdb.org/t/p/w500/9PFonB9REmbi0OH61f9oSRT0XAL.jpg' },
-  { id: 2, title: 'The Witcher', img: 'https://image.tmdb.org/t/p/w500/7vSGP0Z9uI0vH6u979pZpYv9ZpY.jpg' },
-  { id: 3, title: 'Squid Game', img: 'https://image.tmdb.org/t/p/w500/8W99vY7VpXU69u6f39TM69D676S.jpg' },
-  { id: 4, title: 'Money Heist', img: 'https://image.tmdb.org/t/p/w500/reksS76I0hE650Wv5zS20T8p94X.jpg' },
-  { id: 5, title: 'Lucifer', img: 'https://image.tmdb.org/t/p/w500/ekYqS98VY9p8Xre76U9A208YI0x.jpg' },
+  { id: 1, title: 'Wednesday', img: 'https://image.tmdb.org/t/p/w500/iH909nIaBuiT0Ym0vqy2YSIvYvL.jpg' },
+  { id: 2, title: 'The Witcher', img: 'https://image.tmdb.org/t/p/w500/jBv97Cxs9lH797EbLZ9SjxqqmST.jpg' },
+  { id: 3, title: 'Squid Game', img: 'https://image.tmdb.org/t/p/w500/69956vY9pUnuUat9vV6pM98A0A8.jpg' },
+  { id: 4, title: 'Money Heist', img: 'https://image.tmdb.org/t/p/w500/vHe9699p69Un9vV6pM98A0A8.jpg' },
+  { id: 5, title: 'Lucifer', img: 'https://image.tmdb.org/t/p/w500/9699p69Un9vV6pM98A0A8.jpg' },
   { id: 6, title: 'Cobra Kai', img: 'https://image.tmdb.org/t/p/w500/7L996T96Y8Y4YvK39X9pY8v4W5.jpg' }
 ];
 
@@ -26,9 +26,17 @@ function Home() {
   return (
     <div className="home-screen">
       <nav className={`main-nav ${showNav ? "nav-black" : ""}`}>
-        <img className="nav-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
+        <div className="nav-left">
+          <img className="nav-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
+          <ul className="nav-links">
+            <li>Home</li>
+            <li>TV Shows</li>
+            <li>Movies</li>
+            <li>New & Popular</li>
+            <li>My List</li>
+          </ul>
+        </div>
         <div className="nav-right">
-          <img className="nav-avatar" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User" />
           <button className="signout-btn" onClick={() => navigate("/")}>Sign Out</button>
         </div>
       </nav>
@@ -44,7 +52,7 @@ function Home() {
         </div>
         <div className="hero-content">
           <h1 className="hero-title">STRANGER THINGS</h1>
-          <p className="hero-desc">When a young boy vanishes, a small town uncovers a mystery involving supernatural forces.</p>
+          <p className="hero-desc">When a young boy vanishes, a small town uncovers a mystery involving supernatural forces, secret experiments, and one strange little girl.</p>
           <div className="hero-buttons">
             <button className="play-btn">▶ Play</button>
             <button className="info-btn">ⓘ More Info</button>
@@ -58,13 +66,10 @@ function Home() {
         <div className="movie-row">
           {MOVIES.map(movie => (
             <div key={movie.id} className="movie-card">
-              <img 
-                src={movie.img} 
-                alt={movie.title} 
-                className="movie-img" 
-                onError={(e) => { e.target.src = "https://via.placeholder.com/200x300?text=No+Image"; }} 
-              />
-              <div className="movie-overlay"><p>{movie.title}</p></div>
+              <img src={movie.img} alt={movie.title} className="movie-img" />
+              <div className="movie-card-info">
+                <p className="movie-card-title">{movie.title}</p>
+              </div>
             </div>
           ))}
         </div>
