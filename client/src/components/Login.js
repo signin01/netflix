@@ -16,18 +16,37 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-overlay">
-        <header className="login-nav">
-           <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
-        </header>
-        <div className="login-box">
+    <div className="login-screen">
+      <div className="login-nav">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" 
+          alt="Netflix Logo" 
+          className="login-logo"
+        />
+      </div>
+      <div className="login-container">
+        <div className="login-form-box">
           <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
-            <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
-            <button type="submit" className="login-btn">Sign In</button>
+            <input 
+              type="email" 
+              placeholder="Email or phone number" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+            />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
+            />
+            <button type="submit" className="login-submit-btn">Sign In</button>
           </form>
+          <div className="login-help">
+            <p>New to Netflix? <span>Sign up now.</span></p>
+          </div>
         </div>
       </div>
     </div>
