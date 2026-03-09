@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MOVIES = [
   { id: 1, title: 'Wednesday', img: 'https://image.tmdb.org/t/p/w500/9PFonB9REmbi0OH61f9oSRT0XAL.jpg' },
@@ -10,8 +11,28 @@ const MOVIES = [
 ];
 
 function Home() {
+  const navigate = useNavigate();
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) setShowNav(true);
+      else setShowNav(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="home-screen">
+      <nav className={`main-nav ${showNav ? "nav-black" : ""}`}>
+        <img className="nav-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
+        <div className="nav-right">
+          <img className="nav-avatar" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User" />
+          <button className="signout-btn" onClick={() => navigate("/")}>Sign Out</button>
+        </div>
+      </nav>
+
       <header className="hero-banner">
         <div className="video-container">
           <iframe 
@@ -29,6 +50,7 @@ function Home() {
             <button className="info-btn">ⓘ More Info</button>
           </div>
         </div>
+        <div className="hero-fade-bottom"></div>
       </header>
 
       <div className="movie-section">
@@ -36,12 +58,11 @@ function Home() {
         <div className="movie-row">
           {MOVIES.map(movie => (
             <div key={movie.id} className="movie-card">
-              {/* Note: I added a fallback 'onError' just in case a specific link ever breaks */}
               <img 
                 src={movie.img} 
                 alt={movie.title} 
                 className="movie-img" 
-                onError={(e) => { e.target.src = "https://via.placeholder.com/200x300?text=Movie"; }} 
+                onError={(e) => { e.target.src = "https://via.placeholder.com/200x300?text=No+Image"; }} 
               />
               <div className="movie-overlay"><p>{movie.title}</p></div>
             </div>
